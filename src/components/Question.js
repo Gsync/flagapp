@@ -10,6 +10,9 @@ const QuestionStates = {
 };
 
 class Question extends Component {
+    static defaultProps = {
+        options: []
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -17,9 +20,19 @@ class Question extends Component {
         };
     }
     render() {
+        let output = this.props.options.map(option => {
+            return (
+                <div key={option.id}>
+                    {option.name}
+                </div>
+            );
+        });
         return (
             <div>
-                Question Container
+                Question state:
+                {this.props.questionState}
+                {output}
+                {<img src={this.props.flag} />}
                 <Options />
             </div>
         );

@@ -18,7 +18,6 @@ class Quiz extends Component {
             .then(countries => {
                 const selectOption = Math.floor(Math.random() * countries.length);
                 const options = this.getOptions(selectOption, countries);
-                console.dir(options);
                 this.setState({
                     countries,
                     selectOption,
@@ -38,7 +37,22 @@ class Quiz extends Component {
         return shuffle(options);
     }
     render() {
-        let output = (<Question />);
+        let output = (<div>Loading...</div>);
+        if (this.state.selectOption !== undefined) {
+            const name = this.state.countries[this.state.selectOption].name;
+            const flag = this.state.countries[this.state.selectOption].flag;
+            let options = this.state.options.map(option => ({
+                id: option,
+                name: this.state.countries[option].name,
+            }));
+            output = (
+                <Question
+                    options={options}
+                    flag={flag}
+                    questionState={this.state.questionState}
+                />
+            );
+        }
         return (
             <div>
                 Quiz Container
