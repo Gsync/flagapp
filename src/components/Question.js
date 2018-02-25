@@ -20,20 +20,25 @@ class Question extends Component {
         };
     }
     render() {
-        let output = this.props.options.map(option => {
-            return (
-                <div key={option.id}>
-                    {option.name}
-                </div>
-            );
-        });
+        let options = this.props.options.map(option => ({
+            ...option,
+            checked: this.state.userOption === option.id ? true : false
+        })) //Add checked key/value to options object
+        console.log(options);
+        let output = (
+            <Options options={options} />
+        );
         return (
             <div>
+                <img
+                    className="flag-image"
+                    src={this.props.flag}
+                    alt="Flag Image"
+                />
+                {output}
                 Question state:
                 {this.props.questionState}
-                {output}
-                {<img src={this.props.flag} />}
-                <Options />
+                <h3>correct answer: {this.props.answer}</h3>
             </div>
         );
     }

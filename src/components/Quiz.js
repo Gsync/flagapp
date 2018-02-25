@@ -49,13 +49,13 @@ class Quiz extends Component {
                 <Question
                     options={options}
                     flag={flag}
+                    answer={name}
                     questionState={this.state.questionState}
                 />
             );
         }
         return (
             <div>
-                Quiz Container
                 {output}
             </div>
         );
