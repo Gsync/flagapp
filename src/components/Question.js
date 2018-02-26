@@ -35,24 +35,31 @@ class Question extends Component {
             ...option,
             checked: this.state.userOption === option.id
         })) //Add checked key/value to options object
-        console.log(options);
-        let output = (
-            <Options 
-                options={options}
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit} 
-            />
-        );
+        let output;
+        if (this.props.questionState === QuestionStates.QUESTION) {
+            output = (
+                <Options 
+                    options={options}
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit} 
+                />
+            );
+        } else {
+            output = (
+                <Answer 
+                    answer={this.props.answer}
+                    correct={this.props.questionState === QuestionStates.ANS_CORRECT}
+                />
+            );
+        }
         return (
             <div>
                 <img
                     className="flag-image"
                     src={this.props.flag}
-                    alt="Flag Image"
+                    alt="Flag img"
                 />
                 {output}
-                Question state:
-                {this.props.questionState}
                 <h3>correct answer: {this.props.answer}</h3>
             </div>
         );
