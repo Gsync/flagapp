@@ -18,6 +18,17 @@ class Question extends Component {
         this.state = {
             userOption: undefined
         };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleChange(e) {
+        this.setState({
+            userOption: Number(e.target.value)
+        });
+    }
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.onGuess(this.state.userOption);
     }
     render() {
         let options = this.props.options.map(option => ({
@@ -26,7 +37,11 @@ class Question extends Component {
         })) //Add checked key/value to options object
         console.log(options);
         let output = (
-            <Options options={options} />
+            <Options 
+                options={options}
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit} 
+            />
         );
         return (
             <div>

@@ -8,9 +8,10 @@ class Quiz extends Component {
         this.state = {
             countries: [], //data to get back from API Request
             options: [],
-            correctOption: undefined,
+            selectOption: undefined,
             questionState: undefined,
         }
+        this.onGuess = this.onGuess.bind(this);
     }
     componentDidMount() {
         fetch("https://restcountries.eu/rest/v2/all")
@@ -26,8 +27,17 @@ class Quiz extends Component {
                 });
             }).catch(console.warn);
     }
-    getOptions(correctOption, countries) {
-        let options = [correctOption];
+    onGuess(answer) {
+        let questionState;
+        if (answer === this.state.selectOption) {
+            questionState = QuestionStates.ANS_CORRECT;
+        } else {
+            questionState = QuestionStates.ANS_WRONG;
+        }
+        this.setState({ questionState });
+    }
+    getOptions(selectOption, countries) {
+        let options = [selectOption];
         while (options.length < 4) {
             let option = Math.floor(Math.random() * countries.length);
             if (!options.includes(option)) {
@@ -51,6 +61,7 @@ class Quiz extends Component {
                     flag={flag}
                     answer={name}
                     questionState={this.state.questionState}
+                    onGuess={this.onGuess}
                 />
             );
         }
