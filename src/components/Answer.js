@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './Button';
 import './Answer.css';
 
 let output;
@@ -20,6 +21,7 @@ const Answer = ({ correct, answer, onNext }) => {
     return (
         <div className="result">
             {output}
+            <Button text="NEXT" onClick={onNext} />
         </div>
     );
 }

@@ -49,6 +49,7 @@ class Question extends Component {
                 <Answer 
                     answer={this.props.answer}
                     correct={this.props.questionState === QuestionStates.ANS_CORRECT}
+                    onNext={this.props.onNext}
                 />
             );
         }
@@ -60,7 +61,6 @@ class Question extends Component {
                     alt="Flag img"
                 />
                 {output}
-                <h3>correct answer: {this.props.answer}</h3>
             </div>
         );
     }
