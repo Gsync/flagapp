@@ -22,7 +22,7 @@ class Question extends Component {
     render() {
         let options = this.props.options.map(option => ({
             ...option,
-            checked: this.state.userOption === option.id ? true : false
+            checked: this.state.userOption === option.id
         })) //Add checked key/value to options object
         console.log(options);
         let output = (

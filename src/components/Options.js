@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './Button';
 import './Options.css';
 
 const Options = props => {
@@ -17,6 +18,7 @@ const Options = props => {
             <div className="option-container">
                 {inputs}
             </div>
+            <Button text="Guess" type="submit" />
         </form>
     );
 }
